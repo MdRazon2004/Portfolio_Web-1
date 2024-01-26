@@ -12,21 +12,23 @@
       <div class="container">
         <nav>
           <img src="photo/logo.png" class="logo" />
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Portfolio</a></li>
-            <li><a href="#">Contact</a></li>
+          <ul id="sidemenu">
+            <li><a href="#header">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <i class="fas fa-times" onclick="closemenu()"></i>
           </ul>
+          <i class="fas fa-bars" onclick="openmenu()"></i>
         </nav>
-        <div class="header-text">
+        <div class="header-text" onclick="closemenu()">
           <p>UI/UX Designer</p>
           <h1>Hi, I'm <span style="color: #ff004f">Razon</span><br />Hossain From Bangladesh</h1>
         </div>
       </div>
     </div>
-    <div id="about">
+    <div id="about" onclick="closemenu()">
       <div class="container">
         <div class="row">
           <div class="about-col-1">
@@ -66,7 +68,7 @@
         </div>
       </div>
     </div>
-    <div id="services">
+    <div id="services" onclick="closemenu()">
       <div class="container">
         <h1 class="sub-title">My Services</h1>
         <div class="services-list">
@@ -91,7 +93,7 @@
         </div>
       </div>
     </div>
-    <div id="portfolio">
+    <div id="portfolio" onclick="closemenu()">
       <div class="container">
         <h1 class="sub-title">My Work</h1>
         <div class="work-list">
@@ -123,7 +125,7 @@
         <a href="#" class="btn">See more</a>
       </div>
     </div>
-    <div id="contact">
+    <div id="contact" onclick="closemenu()">
       <div class="container">
         <div class="row">
           <div class="contact-left">
@@ -139,7 +141,7 @@
             <a href="photo/my-cv.pdf" download class="btn btn2">Download CV</a>
           </div>
           <div class="contact-right">
-            <form>
+            <form name="submit-to-google-sheet">
               <input type="text" name="Name" placeholder="Your Name" required />
               <input type="email" name="Email" placeholder="Your Email" required />
               <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
@@ -165,6 +167,26 @@
         event.currentTarget.classList.add('active-link');
         document.getElementById(tabname).classList.add('active-tab');
       }
+    </script>
+    <script>
+      var sidemeu = document.getElementById('sidemenu');
+      function openmenu() {
+        sidemeu.style.right = '0';
+      }
+      function closemenu() {
+        sidemeu.style.right = '-170px';
+      }
+    </script>
+    <script>
+      const scriptURL = 'https://script.google.com/macros/s/AKfycbzV8ckB5baCAuHjF-VsoIxFSgHG4vYRneolU79hczqWr-J6tFRfSwGI-kDyi8alOR8-/exec';
+      const form = document.forms['submit-to-google-sheet'];
+
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+          .then(response => console.log('Success!', response))
+          .catch(error => console.error('Error!', error.message));
+      });
     </script>
   </body>
 </html>
