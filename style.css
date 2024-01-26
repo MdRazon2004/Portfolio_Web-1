@@ -370,3 +370,8 @@ nav .fas {
     font-size: 14px;
   }
 }
+#msg {
+  display: block;
+  margin-top: -40px;
+  color: #61b751;
+}
